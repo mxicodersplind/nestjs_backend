@@ -1,3 +1,6 @@
+To start the app:
+use yarn start: dev
+
 Routes:
 
  POST: localhost:3000/api/auth/login:
