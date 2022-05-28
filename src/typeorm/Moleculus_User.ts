@@ -1,5 +1,6 @@
+import { moleculus_country } from './Moleculus_Country';
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum is_email_verified_Enum {
     Yes = 'Yes',
@@ -68,10 +69,8 @@ export class moleculus_users {
     })
     password: string;
 
-    @Column({
-        type: 'int',
-        default: 0
-    })
+    @OneToOne(() => moleculus_country)
+    @JoinColumn()
     country_id: number;
 
     @Column({
@@ -81,6 +80,8 @@ export class moleculus_users {
     })
     country_name: string;
 
+    @OneToOne(() => moleculus_country)
+    @JoinColumn()
     @Column({
         type: 'int',
         nullable: true,
@@ -195,7 +196,7 @@ export class moleculus_users {
     @Column({
         type: 'varchar',
         length: 255,
-        default: null,
+        default: 'USD',
     })
     default_currency: string;
 

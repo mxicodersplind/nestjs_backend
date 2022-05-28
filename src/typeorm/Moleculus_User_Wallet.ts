@@ -1,12 +1,22 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    Entity,
+    JoinColumn,
+    OneToOne,
+    PrimaryGeneratedColumn
+} from 'typeorm';
+import { moleculus_users } from './Moleculus_User';
+
 
 @Entity()
 export class moleculus_user_wallet {
-    @PrimaryColumn({})
+    @PrimaryGeneratedColumn({})
     wallet_id: number;
 
     //Use Foreign Key
+    @OneToOne(() => moleculus_users)
+    @JoinColumn()
     @Column({
         type: 'bigint',
     })

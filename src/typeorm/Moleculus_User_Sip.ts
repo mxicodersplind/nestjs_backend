@@ -1,3 +1,4 @@
+import { OneToOne, ManyToOne, JoinColumn } from 'typeorm';
 /* eslint-disable prettier/prettier */
 
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
@@ -25,10 +26,8 @@ export class moleculus_user_sip {
     })
     user_sip_id: number;
 
-    @OneToMany(
-        () => moleculus_users,
-        (moleculus_users) => moleculus_users.user_id,
-    )
+    @ManyToOne(() => moleculus_users)
+    @JoinColumn()
     @Column({
         type: 'int',
         default: 0,
@@ -89,6 +88,8 @@ export class moleculus_user_sip {
     })
     sip_comment: string;
 
+    @OneToOne(() => moleculus_users)
+    @JoinColumn()
     @Column({
         type: 'bigint'
     })

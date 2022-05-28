@@ -1,19 +1,25 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import { moleculus_indextoken } from './Moleculus_Indextoken';
+import { moleculus_users } from './Moleculus_User';
 
 @Entity()
 export class moleculus_order_history {
     @PrimaryColumn({
         type: 'bigint',
     })
-    order_id
+    order_id: number;
 
+    @ManyToOne(() => moleculus_users)
+    @JoinColumn()
     @Column({
         type: 'bigint',
         default: 0,
     })
     user_id: number;
 
+    @ManyToOne(() => moleculus_indextoken)
+    @JoinColumn()
     @Column({
         type: 'bigint',
         default: 0,
@@ -26,13 +32,12 @@ export class moleculus_order_history {
     })
     token_name: string;
 
-
     @Column({
         type: 'varchar',
         length: 255,
         default: '0',
     })
-    token_code: string
+    token_code: string;
 
     @Column({
         type: 'varchar',
@@ -49,7 +54,6 @@ export class moleculus_order_history {
 
     @Column({
         type: 'time with time zone',
-
     })
     created_datetime: Date;
 
@@ -58,6 +62,4 @@ export class moleculus_order_history {
         length: 255,
     })
     created_ip: string;
-
-
-} 
+}

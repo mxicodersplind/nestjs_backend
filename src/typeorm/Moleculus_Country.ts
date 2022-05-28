@@ -6,11 +6,8 @@ export enum country_status_Enum {
     Enable = 'Enable',
     Disable = 'Disable'
 }
-
-
 @Entity()
 export class moleculus_country {
-
 
     @PrimaryGeneratedColumn({
         type: 'bigint',
@@ -58,7 +55,4 @@ export class moleculus_country {
         default: '',
     })
     created_ip: string;
-
 }
-
-

@@ -1,62 +1,68 @@
 /* eslint-disable prettier/prettier */
+import { moleculus_user_sip } from './Moleculus_User_Sip';
+import { JoinColumn, ManyToOne, OneToOne } from 'typeorm';
+
 import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { moleculus_users } from './Moleculus_User';
 
 export enum tra_satus_enum {
-    Pendding = 'Pendding',
-    Completed = 'Completed',
+  Pendding = 'Pendding',
+  Completed = 'Completed',
 }
 
 @Entity()
 export class moleculus_sip_transaction {
-    @PrimaryColumn({
-        type: 'int',
-    })
-    sip_tra_id: number;
+  @PrimaryColumn({
+    type: 'int',
+  })
+  sip_tra_id: number;
 
-    //foreign KEy-> moleculus_user_sip
+  //foreign KEy-> moleculus_user_sip
+  @OneToOne(() => moleculus_user_sip)
+  @JoinColumn()
+  @Column({
+    type: 'int',
+    default: 0,
+  })
+  sip_id: number;
 
+  //foreign key ->moleculus users
+  @ManyToOne(() => moleculus_users)
+  @JoinColumn()
+  @Column({
+    type: 'bigint',
+    default: 0,
+  })
+  tra_user_id: number;
 
-    @Column({
-        type: 'int',
-        default: 0,
-    })
-    sip_id: number;
+  @Column({
+    type: 'varchar',
+    length: '255',
+    default: '0',
+  })
+  transaction_price: string;
 
-    //foreign key ->moleculus users
-    @Column({
-        type: 'bigint',
-        default: 0,
-    })
-    tra_user_id: number;
+  @Column({
+    type: 'varchar',
+    length: '255',
+  })
+  tra_currency: string;
 
-    @Column({
-        type: 'varchar',
-        length: '255',
-        default: '0',
-    })
-    transaction_price: string;
+  @Column({
+    type: 'varchar',
+    length: '255',
+  })
+  token_name: string;
 
-    @Column({
-        type: 'varchar',
-        length: '255',
-    })
-    tra_currency: string;
+  @Column({
+    type: 'enum',
+    enum: tra_satus_enum,
+    default: tra_satus_enum.Pendding,
+  })
+  tra_satus: tra_satus_enum;
 
-    @Column({
-        type: 'varchar',
-        length: '255',
-    })
-    token_name: string;
-
-    @Column({
-        type: 'enum',
-        enum: tra_satus_enum,
-        default: tra_satus_enum.Pendding,
-    })
-    tra_satus: tra_satus_enum;
-
-    @Column({
-        type: 'date',
-    })
-    created_datetime: Date;
+  @Column({
+    type: 'date',
+  })
+  created_datetime: Date;
 }

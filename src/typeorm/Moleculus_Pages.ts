@@ -1,6 +1,8 @@
+import { JoinColumn, ManyToOne } from 'typeorm';
 /* eslint-disable prettier/prettier */
 import { Column, Entity, ManyToMany, PrimaryColumn } from 'typeorm';
 import { moleculus_country } from './Moleculus_Country';
+import { moleculus_state } from './Moleculus_State';
 
 export enum page_status_enum {
     Enable = 'Enable',
@@ -41,7 +43,8 @@ export class moleculus_pages {
     created_ip: string;
 
     //Foreign Key to moleculus_country
-    @ManyToMany(() => moleculus_country, (moleculus_country) => moleculus_country)
+    @ManyToOne(() => moleculus_country)
+    @JoinColumn()
     @Column({
         type: 'bigint',
         default: 0,
@@ -49,6 +52,8 @@ export class moleculus_pages {
     page_country_id: number;
 
     //Foreign Key-> moleculus_state
+    @ManyToOne(() => moleculus_state)
+    @JoinColumn()
     @Column({
         type: 'text',
     })

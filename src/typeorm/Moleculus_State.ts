@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryColumn } from 'typeorm';
+import { moleculus_country } from './Moleculus_Country';
 
 export enum state_status_Enum {
     Enable = 'Enable',
@@ -21,10 +22,10 @@ export class moleculus_state {
     })
     state_name: string;
 
+
+    @OneToOne(() => moleculus_country)
+    @JoinColumn()
     @Column({
-        type: 'varchar',
-        length: 255,
-        default: "",
     })
     state_country_id: string;
 
