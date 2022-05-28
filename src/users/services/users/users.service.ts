@@ -5,10 +5,10 @@ import { serializedUser, User } from '../../types';
 import { Injectable, SerializeOptions } from '@nestjs/common';
 import { plainToClass } from 'class-transformer';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User as UserEntity } from '../../../typeorm';
+import { moleculus_users as UserEntity } from '../../../typeorm';
 import { Repository } from 'typeorm';
 import { encodePassword } from 'src/utils/bcrypt';
-
+ 
 @Injectable()
 export class UsersService {
 
@@ -59,7 +59,7 @@ export class UsersService {
     createUser(createuserDto: CreateUserDto) {
         console.log("Inside User Service Layer ...");
         const password = encodePassword(createuserDto.password)
-        console.log("Encrypted-Password:  " + password);
+        //console.log("Encrypted-Password:  " + password);
 
         const newUser = this.userRepository.create({ ...createuserDto, password });
 
@@ -70,13 +70,20 @@ export class UsersService {
     async findUserByUsername(username: string) {
         const user = await this.userRepository.findOne({
             where:
-                { username: username }
+                { fullname: username }
         });
         return user;
     }
 
     findUserById = async (id: number) => {
-        return await this.userRepository.findOne({ where: { id: id } });
+        return await this.userRepository.findOne({ where: { user_id: id } });
 
     }
+
+    //findCoin
+    findCoin = async (coin: string) => {
+        return await this.userRepository.findOne({});
+
+    }
+
 }

@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { CustomersModule } from './customers/customers.module';
-import { UsersModule } from './users/users.module';
-import { User } from './typeorm/User';
-import { AuthModule } from './auth/auth.module';
-import entities from './typeorm'
 import { PassportModule } from '@nestjs/passport';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AuthModule } from './auth/auth.module';
+import { CustomersModule } from './customers/customers.module';
+import entities from './typeorm';
+import { UsersModule } from './users/moleculus_users.module';
+import { UtilsModule } from './utils/utils/utils.module';
 
 
 // {
@@ -20,14 +20,17 @@ import { PassportModule } from '@nestjs/passport';
 //   synchronize: true,
 // }
 
+// new- edit
+// username: 'postgres',
+// password: 'Rishabh123$',
 
 @Module({
-  imports: [CustomersModule, UsersModule, TypeOrmModule.forRoot({
+  imports: [CustomersModule, UsersModule, UtilsModule, TypeOrmModule.forRoot({
     type: 'postgres',
     host: 'localhost',
     port: 5432,
-    username: 'postgres',
-    password: 'Rishabh123$',
+    username: 'admin',
+    password: 'admin',
     database: 'nestjs_db',
     entities: entities,
     synchronize: true,

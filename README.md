@@ -4,12 +4,12 @@ use yarn start: dev
 Routes:
 
  POST: localhost:3000/api/auth/login:
+
  It    takes  username and email from the request  (form data and then checks for the password. (The password is hashed using the bcrypt Js library and thus it matches the given password and the hashed password ) . If the entered details are correct then “Login Successful “ response is received.
 If the Details provided are incorrect, then unauthorized response is received.
 Eg:
 
 Request:
-
 
 
 Response :

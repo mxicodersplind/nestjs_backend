@@ -64,6 +64,7 @@ export class ControllersController {
     async createUser(@Body() createUserDto: CreateUserDto, @Res() res: Response) {
         console.log("createUserDto ...");
         const user_ = await this.userService.createUser(createUserDto);
+
         res.status(201).json({
             message: 'User has been created successfully',
             user: user_,

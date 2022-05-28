@@ -11,12 +11,11 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.use(session({
-    //secret: 'Extremly*34%$gh_Secret98$%^"_Secret_k967@45./:9878',
     secret: 'Extremly*34%$gh_Secret98$%^"_Secret_k967@45./:9878',
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24 * 0.005,
+      maxAge: 1000 * 60 * 60 * 24 * 0.05,
     },
   }));
   app.use(passport.initialize());
