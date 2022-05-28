@@ -18,7 +18,7 @@ export enum sip_status_enum {
 }
 
 @Entity()
-export class molecular_user_sip {
+export class moleculus_user_sip {
     @PrimaryColumn({
         type: 'int',
         generated: true,

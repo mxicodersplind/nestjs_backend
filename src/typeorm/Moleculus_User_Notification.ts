@@ -42,10 +42,10 @@ export class moleculus_user_notification {
 
     //FOREIGN KEY -> moleculus_users
     @ManyToOne(() => moleculus_users)
-    // @Column({
-    //     type: 'bigint',
-    //     default: 0,
-    // })
+    @Column({
+        type: 'bigint',
+        default: 0,
+    })
     noti_user_id: number;
 
     @Column({
