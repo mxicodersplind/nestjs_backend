@@ -13,12 +13,16 @@ export class moleculus_sip_transaction {
     })
     sip_tra_id: number;
 
+    //foreign KEy-> moleculus_user_sip
+
+
     @Column({
         type: 'int',
         default: 0,
     })
     sip_id: number;
 
+    //foreign key ->moleculus users
     @Column({
         type: 'bigint',
         default: 0,

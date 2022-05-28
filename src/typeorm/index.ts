@@ -2,7 +2,7 @@
 import { Coin } from './Coin';
 import { moleculus_country } from './Moleculus_Country';
 import { moleculus_indextoken } from './Moleculus_Indextoken';
-import { molecululus_pages } from './Moleculus_Pages';
+import { moleculus_pages } from './Moleculus_Pages';
 import { moleculus_settings } from './Moleculus_Settings';
 import { moleculus_sip_transaction } from './Moleculus_Sip_Transcation';
 import { moleculus_state } from './Moleculus_State';
@@ -25,7 +25,7 @@ const entities = [
     moleculus_user_kyc,
     moleculus_user_notification,
     moleculus_settings,
-    molecululus_pages,
+    moleculus_pages,
     moleculus_user_wallet,
     moleculus_indextoken,
     moleculus_order_history
@@ -42,7 +42,7 @@ export {
     moleculus_user_kyc,
     moleculus_settings,
     moleculus_user_notification,
-    molecululus_pages,
+    moleculus_pages,
     moleculus_user_wallet,
     moleculus_indextoken,
     moleculus_order_history
