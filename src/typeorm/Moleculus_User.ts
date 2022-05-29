@@ -4,10 +4,12 @@ import {
   Column,
   Entity,
   JoinColumn,
+  OneToMany,
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
 import { moleculus_country } from './Moleculus_Country';
+import { moleculus_sip_transaction } from './Moleculus_Sip_Transcation';
 
 export enum is_email_verified_Enum {
   Yes = 'Yes',
@@ -274,4 +276,10 @@ export class moleculus_users extends BaseEntity {
     default: null,
   })
   secondary_email: string;
+
+  @OneToMany(
+    () => moleculus_sip_transaction,
+    (Moleculus_sip_transaction) => Moleculus_sip_transaction.tra_user_id,
+  )
+  Moleculus_sip_transaction: moleculus_sip_transaction[];
 }

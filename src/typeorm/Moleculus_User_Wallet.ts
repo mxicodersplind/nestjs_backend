@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import {
+  BaseEntity,
   Column,
   Entity,
   JoinColumn,
@@ -9,7 +10,7 @@ import {
 import { moleculus_users } from './Moleculus_User';
 
 @Entity()
-export class moleculus_user_wallet {
+export class moleculus_user_wallet extends BaseEntity {
   @PrimaryGeneratedColumn({})
   wallet_id: number;
 

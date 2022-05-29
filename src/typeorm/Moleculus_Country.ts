@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 export enum country_status_Enum {
   Enable = 'Enable',
   Disable = 'Disable',
 }
-@Entity()
-export class moleculus_country {
+@Entity('moleculus_country')
+export class moleculus_country extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })

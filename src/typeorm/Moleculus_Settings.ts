@@ -1,12 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, BaseEntity } from 'typeorm';
 
 export enum setting_status_enum {
   Enable = 'Enable',
   Disable = 'Disable',
 }
 @Entity()
-export class moleculus_settings {
+export class moleculus_settings extends BaseEntity {
   @PrimaryColumn({
     type: 'bigint',
     generated: true,

@@ -1,8 +1,8 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity()
-export class moleculus_indextoken {
+@Entity('moleculus_indextoken')
+export class moleculus_indextoken extends BaseEntity {
   @PrimaryColumn({
     type: 'bigint',
   })

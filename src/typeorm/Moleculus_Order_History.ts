@@ -1,10 +1,17 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { moleculus_indextoken } from './Moleculus_Indextoken';
 import { moleculus_users } from './Moleculus_User';
 
-@Entity()
-export class moleculus_order_history {
+@Entity('moleculus_order_history')
+export class moleculus_order_history extends BaseEntity {
   @PrimaryColumn({
     type: 'bigint',
   })

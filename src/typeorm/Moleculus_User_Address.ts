@@ -1,10 +1,17 @@
 /* eslint-disable prettier/prettier */
 import { randomInt } from 'crypto';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  BaseEntity,
+} from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
 
 @Entity()
-export class moleculus_user_address {
+export class moleculus_user_address extends BaseEntity {
   @PrimaryColumn({
     type: 'smallint',
     generated: true,

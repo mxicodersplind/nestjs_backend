@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn,BaseEntity } from 'typeorm';
 import { moleculus_country } from './Moleculus_Country';
 
 export enum state_status_Enum {
@@ -8,7 +8,7 @@ export enum state_status_Enum {
 }
 
 @Entity()
-export class moleculus_state {
+export class moleculus_state extends BaseEntity {
   @PrimaryColumn({
     type: 'smallint',
     generated: true,

@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn,BaseEntity } from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
 
 export enum kyc_status_enum {
@@ -8,7 +8,7 @@ export enum kyc_status_enum {
   Completed = 'Completed',
 }
 @Entity()
-export class moleculus_user_kyc {
+export class moleculus_user_kyc extends BaseEntity {
   @PrimaryColumn({
     type: 'bigint',
     generated: true,

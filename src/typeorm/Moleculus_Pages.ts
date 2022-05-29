@@ -1,5 +1,12 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { moleculus_country } from './Moleculus_Country';
 import { moleculus_state } from './Moleculus_State';
 
@@ -8,8 +15,8 @@ export enum page_status_enum {
   Disable = 'Disable',
 }
 
-@Entity()
-export class moleculus_pages {
+@Entity('moleculus_pages')
+export class moleculus_pages extends BaseEntity {
   @PrimaryColumn({})
   pagetitle_id: number;
 

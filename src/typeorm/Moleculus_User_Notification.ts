@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn, BaseEntity } from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
 
 export enum balance_email_enum {
@@ -33,7 +33,7 @@ export enum update_device_enum {
 }
 
 @Entity()
-export class moleculus_user_notification {
+export class moleculus_user_notification extends BaseEntity {
   @PrimaryColumn({
     type: 'int',
     generated: true,
