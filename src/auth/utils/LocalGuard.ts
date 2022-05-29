@@ -5,22 +5,21 @@ import { Request } from 'express';
 
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {
-    async canActivate(context: ExecutionContext) {
-        const result = (await super.canActivate(context)) as boolean;
+  async canActivate(context: ExecutionContext) {
+    const result = (await super.canActivate(context)) as boolean;
 
-        const request = context.switchToHttp().getRequest();
+    const request = context.switchToHttp().getRequest();
 
-        await this.logIn(request);
+    await this.logIn(request);
 
-        return result;
-    }
+    return result;
+  }
 }
-
 
 @Injectable()
 export class AuthenticatedGuard implements CanActivate {
-    async canActivate(context: ExecutionContext): Promise<any> {
-        const req = context.switchToHttp().getRequest<Request>();
-        return req.isAuthenticated()
-    }
+  async canActivate(context: ExecutionContext): Promise<any> {
+    const req = context.switchToHttp().getRequest<Request>();
+    return req.isAuthenticated();
+  }
 }

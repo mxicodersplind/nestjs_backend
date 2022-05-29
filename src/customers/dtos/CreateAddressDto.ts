@@ -2,18 +2,17 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class CreateAddressDto {
-    @IsNotEmpty()
-    line1: string;
+  @IsNotEmpty()
+  line1: string;
 
-    line2: string;
+  line2: string;
 
-    @IsNotEmpty()
-    city: string;
+  @IsNotEmpty()
+  city: string;
 
-    @IsNotEmpty()
-    state: string;
+  @IsNotEmpty()
+  state: string;
 
-    @IsNotEmpty()
-    zip: string;
-
+  @IsNotEmpty()
+  zip: string;
 }

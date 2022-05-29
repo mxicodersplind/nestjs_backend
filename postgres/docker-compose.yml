@@ -1,0 +1,17 @@
+version: '2.2'
+
+services:
+  postgres-moleculus:
+    image: postgres
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_PASSWORD=admin2
+      - POSTGRES_USER=admin2
+      - POSTGRES_DB=moleculus_db
+    volumes:
+      - postgres-data:/var/lib/postgresql/nest_data
+
+volumes:
+  postgres-data:
+    driver: local
