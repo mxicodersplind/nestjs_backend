@@ -2,12 +2,12 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateCountryDto {
-    @IsNotEmpty()
-    country_name: string;
+  @IsNotEmpty()
+  country_name: string;
 
-    @IsString()
-    country_code: string;
+  @IsString()
+  country_code: string;
 
-    @IsNotEmpty()
-    country_logo: string;
+  @IsNotEmpty()
+  country_logo: string;
 }

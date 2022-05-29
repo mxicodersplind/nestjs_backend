@@ -2,7 +2,6 @@
 import { Column, Entity, JoinColumn, OneToOne, PrimaryColumn } from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
 
-
 export enum kyc_status_enum {
   Pending = 'Pending',
   Rejected = 'Rejected',

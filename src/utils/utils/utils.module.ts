@@ -10,20 +10,25 @@ import { StateController } from '../controllers/StateControllers';
 import { CountryService } from '../services/Country.service';
 import { StateService } from '../services/State.service';
 
-
-
 @Module({
-    imports: [
-        TypeOrmModule.forFeature([moleculus_country, moleculus_state, moleculus_user_sip, moleculus_sip_transaction]),
-    ],
-    controllers: [CountryController, StateController],
-    providers: [{
-        provide: 'COUNTRY_SERVICE',
-        useClass: CountryService,
-    }, {
-        provide: 'STATE_SERVICE',
-        useClass: StateService,
-    }
-    ]
+  imports: [
+    TypeOrmModule.forFeature([
+      moleculus_country,
+      moleculus_state,
+      moleculus_user_sip,
+      moleculus_sip_transaction,
+    ]),
+  ],
+  controllers: [CountryController, StateController],
+  providers: [
+    {
+      provide: 'COUNTRY_SERVICE',
+      useClass: CountryService,
+    },
+    {
+      provide: 'STATE_SERVICE',
+      useClass: StateService,
+    },
+  ],
 })
-export class UtilsModule { }
+export class UtilsModule {}

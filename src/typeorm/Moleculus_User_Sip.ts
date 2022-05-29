@@ -1,6 +1,5 @@
-import { OneToOne, ManyToOne, JoinColumn } from 'typeorm';
 /* eslint-disable prettier/prettier */
-
+import { OneToOne, ManyToOne, JoinColumn } from 'typeorm';
 import { Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
 
@@ -101,6 +100,7 @@ export class moleculus_user_sip {
     })
     created_datetime: Date;
 
+    @OneToOne(() => moleculus_users)
     @Column({
         type: 'varchar',
         length: '255',

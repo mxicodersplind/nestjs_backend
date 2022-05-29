@@ -1,13 +1,11 @@
 /* eslint-disable prettier/prettier */
 import * as bcrypt from 'bcrypt';
 
-// const SALT = 10;
-
 export function encodePassword(rawPassword: string) {
-    const SALT = bcrypt.genSaltSync();
-    return bcrypt.hashSync(rawPassword, SALT);
+  const SALT = bcrypt.genSaltSync();
+  return bcrypt.hashSync(rawPassword, SALT);
 }
 
 export function comparePassword(rawPassword: string, hash: string) {
-    return bcrypt.compareSync(rawPassword, hash,);
+  return bcrypt.compareSync(rawPassword, hash);
 }

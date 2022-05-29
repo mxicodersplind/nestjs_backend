@@ -1,9 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { moleculus_user_sip } from './Moleculus_User_Sip';
-import { JoinColumn, ManyToOne, OneToOne } from 'typeorm';
-
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
 import { moleculus_users } from './Moleculus_User';
+import { moleculus_user_sip } from './Moleculus_User_Sip';
 
 export enum tra_satus_enum {
   Pendding = 'Pendding',
