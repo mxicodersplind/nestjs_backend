@@ -2,11 +2,13 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { moleculus_country } from './Moleculus_Country';
 import { moleculus_sip_transaction } from './Moleculus_Sip_Transcation';
@@ -78,9 +80,13 @@ export class moleculus_users extends BaseEntity {
   })
   password: string;
 
-  @OneToOne(() => moleculus_country)
-  @JoinColumn()
-  country_id: number;
+  @ManyToOne(
+    () => moleculus_country,
+    (Moleculus_country) => Moleculus_country.Moleculus_user,
+  )
+  @JoinColumn({ name: 'country_id' })
+  // country_id: number;
+  Moleculus_country: moleculus_country;
 
   @Column({
     type: 'varchar',
@@ -89,13 +95,16 @@ export class moleculus_users extends BaseEntity {
   })
   country_name: string;
 
-  @OneToOne(() => moleculus_country)
-  @JoinColumn()
-  @Column({
-    type: 'int',
-    nullable: true,
-  })
-  state_id: number;
+  @ManyToOne(
+    () => moleculus_country,
+    (Moleculus_country) => Moleculus_country.Moleculus_user,
+  )
+  @JoinColumn({ name: 'state_id' })
+  // @Column({
+  //   type: 'int',
+  //   nullable: true,
+  // })
+  Moleculus_country_: moleculus_country;
 
   @Column({
     type: 'varchar',
@@ -222,10 +231,11 @@ export class moleculus_users extends BaseEntity {
   })
   passcode: string;
 
-  @Column({
-    type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP',
-  })
+  // @Column({
+  //   type: 'timestamptz',
+  //   default: () => 'CURRENT_TIMESTAMP',
+  // })
+  @CreateDateColumn()
   created_datetime: Date;
 
   @Column({
@@ -235,11 +245,12 @@ export class moleculus_users extends BaseEntity {
   })
   created_ip: string;
 
-  @Column({
-    type: 'timestamptz',
-    default: () =>
-      "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP + INTERVAL '1 DAY'",
-  })
+  // @Column({
+  //   type: 'timestamptz',
+  //   default: () =>
+  //     "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP + INTERVAL '1 DAY'",
+  // })
+  @UpdateDateColumn()
   modified_datetime: Date;
 
   @Column({

@@ -1,5 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Column, Entity, PrimaryColumn, BaseEntity } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryColumn,
+} from 'typeorm';
 
 export enum setting_status_enum {
   Enable = 'Enable',
@@ -16,12 +22,14 @@ export class moleculus_settings extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 255,
+    default: '',
   })
   setting_name: string;
 
   @Column({
     type: 'varchar',
     length: 255,
+    default: '',
   })
   setting_value: string;
 
@@ -32,14 +40,13 @@ export class moleculus_settings extends BaseEntity {
   })
   setting_status: setting_status_enum;
 
-  @Column({
-    type: 'timestamptz',
-  })
+  @CreateDateColumn({})
   created_datetime: Date;
 
   @Column({
     type: 'varchar',
     length: 255,
+    default: '00.00.00.00',
   })
   created_ip: string;
 }

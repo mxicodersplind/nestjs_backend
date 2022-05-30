@@ -1,5 +1,14 @@
 /* eslint-disable prettier/prettier */
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { JoinColumn } from 'typeorm';
+
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { moleculus_users } from './Moleculus_User';
 
 export enum country_status_Enum {
   Enable = 'Enable',
@@ -7,6 +16,19 @@ export enum country_status_Enum {
 }
 @Entity('moleculus_country')
 export class moleculus_country extends BaseEntity {
+  @OneToMany(
+    () => moleculus_users,
+    (Moleculus_user) => Moleculus_user.Moleculus_country,
+  )
+  @JoinColumn({ name: 'country_id' })
+  Moleculus_user: moleculus_users[];
+
+  @OneToMany(
+    () => moleculus_users,
+    (Moleculus_user_) => Moleculus_user_.Moleculus_country_,
+  )
+  Moleculus_user_: moleculus_users[];
+
   @PrimaryGeneratedColumn({
     type: 'bigint',
   })
