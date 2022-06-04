@@ -1,10 +1,16 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
-import { Module } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { CustomersModule } from './customers/customers.module';
+import { checkAccessToken } from './middlewares/checkAccessToken.middleware';
 import entities from './typeorm';
 import { UsersModule } from './users/moleculus_users.module';
 import { UtilsModule } from './utils/utils/utils.module';
@@ -46,4 +52,14 @@ require('dotenv').config({ path: '.env' }, { debug: false });
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(checkAccessToken)
+      .exclude({
+        path: 'api/auth/generaltoken',
+        method: RequestMethod.GET,
+      })
+      .forRoutes('*');
+  }
+}

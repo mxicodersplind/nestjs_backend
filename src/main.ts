@@ -1,17 +1,26 @@
 /* eslint-disable*/ /*prettier/prettier */
 import { NestFactory } from '@nestjs/core';
+import * as cookieParser from 'cookie-parser';
 import * as session from 'express-session';
 import * as passport from 'passport';
 import { AppModule } from './app.module';
 
 require('dotenv').config({ debug: false });
 
+const PORT = process.env.PORT || 3000;
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
+  app.use(cookieParser());
+  app.enableCors({
+    origin: '*',
+    credentials: true,
+  });
   app.use(
     session({
-      secret: 'Extremly*34%$gh_Secret98$%^"_Secret_k967@45./:9878',
+      name: 'The_session_ID',
+      secret: `${process.env.SESSION_SECRET}`,
       resave: false,
       saveUninitialized: false,
       cookie: {
@@ -21,9 +30,9 @@ async function bootstrap() {
   );
   app.use(passport.initialize());
   app.use(passport.session());
-  await app.listen(3000);
+  await app.listen(PORT);
   console.log(
-    `Server is running on PORT: 3000 in ${process.env.NODE_ENV} mode`,
+    `Server is running on PORT: ${PORT} in ${process.env.NODE_ENV} mode`,
   );
 }
 bootstrap();

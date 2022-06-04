@@ -15,7 +15,7 @@ export class CustomersModule implements NestModule {
     configure(consumer: MiddlewareConsumer) {
         consumer.apply(ValidateCustomerMiddleware)
             .exclude({
-                path: 'api/customers/create',
+                path: 'api/customers/create', 
                 method: RequestMethod.POST,
             })
             .forRoutes(CustomersController)

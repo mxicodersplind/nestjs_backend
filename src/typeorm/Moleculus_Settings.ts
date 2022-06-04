@@ -46,7 +46,7 @@ export class moleculus_settings extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 255,
-    default: '00.00.00.00',
+    default: '',
   })
   created_ip: string;
 }

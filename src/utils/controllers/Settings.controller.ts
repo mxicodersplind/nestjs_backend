@@ -4,13 +4,15 @@
 import {
   Body,
   Controller,
+  Delete,
+  Get,
   Inject,
   Param,
   Post,
   Put,
   Res,
   UsePipes,
-  ValidationPipe,
+  ValidationPipe
 } from '@nestjs/common';
 import { Response } from 'express';
 import { SettingService } from '../services/Settings.service';
@@ -48,6 +50,50 @@ export class SettingsController {
       });
     } else {
       res.status(400).json({
+        message: 'oops... Setting not found',
+      });
+    }
+  }
+
+  @Get('get')
+  async getAllSettings(@Res() res: Response) {
+    const settings = await this.settingService.getAllSettings();
+    if (settings) {
+      return res.status(200).json({
+        message: 'All settings retrieved successfully.',
+        settings: settings,
+      });
+    } else {
+      res.status(400).json({
+        message: 'No settings found',
+      });
+    }
+  }
+
+  @Get('get/:id')
+  async getSetting(@Param('id') id: number, @Res() res: Response) {
+    const setting = await this.settingService.getSetting(id);
+
+    if (setting) {
+      res.status(200).json(setting);
+    } else {
+      return res.status(400).json({
+        message: 'oops... Setting not found',
+      });
+    }
+  }
+
+  //Delete Setting
+  @Delete('delete/:id')
+  async deleteSetting(@Param('id') id: number, @Res() res: Response) {
+    const setting = await this.settingService.deleteSetting(id);
+
+    if (setting) {
+      res.status(200).json({
+        message: 'Setting deleted successfully',
+      });
+    } else {
+      return res.status(400).json({
         message: 'oops... Setting not found',
       });
     }

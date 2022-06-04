@@ -11,4 +11,6 @@ export class CreateSettingDto {
 
   //@IsEnum(setting_status_enum)
   setting_status: setting_status_enum;
+
+  // created_ip = fetch('https://api.ipify.org').then((res) => res.text());
 }

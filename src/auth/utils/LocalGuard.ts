@@ -6,12 +6,16 @@ import { Request } from 'express';
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {
   async canActivate(context: ExecutionContext) {
-    const result = (await super.canActivate(context)) as boolean;
-
+    //console.log('Context:  ', context.switchToHttp().getRequest());
+    console.log(
+      'per.canActivat',
+      (await super.canActivate(context)) as boolean,
+    );
+    const result = (await super.canActivate(context)) as any;
+    console.log('%%%%%%%%%%%  %%%%%%%%  %%%%%%%%%%%    %%%%%%%%%%%%%%% ');
+    console.log('Result: :\n   /n  ', result);
     const request = context.switchToHttp().getRequest();
-
-    await this.logIn(request);
-
+    await super.logIn(request);
     return result;
   }
 }
