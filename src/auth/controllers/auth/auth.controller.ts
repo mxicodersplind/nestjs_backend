@@ -1,3 +1,6 @@
+/* eslint-disable prefer-const */
+/* eslint-disable @typescript-eslint/no-inferrable-types */
+//import { AuthService } from './../../services/auth/auth.service';
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable prettier/prettier */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -6,6 +9,7 @@ import {
   Body,
   Controller,
   Get,
+  Inject,
   Post,
   Req,
   Response,
@@ -14,31 +18,58 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { Request as ReqEx, Response as resEx } from 'express';
+import { AuthService } from '../../services/auth/auth.service';
 import { AuthenticatedGuard } from '../../utils/LocalGuard';
 require('dotenv').config({ debug: false });
 
-let jwt: any = '';
+let jwt: string = '';
 @Controller('auth')
 export class AuthController {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
+    @Inject('AUTH_SERVICE') private readonly authService: AuthService,
+  ) {}
   //@UseGuards(AuthenticatedGuard)
   @Post('login')
-  async login(@Req() req, @Response() res) {
+  async login(@Req() req, @Response() res, @Body() body) {
+    console.log('body: ', body);
     try {
       const logintoken__ = req.headers.authorization.split(' ')[1];
       if (!logintoken__) {
         throw new Error('Token not found');
       } else if (jwt !== logintoken__) {
         res.status(401).json({
-          message: 'Invalid Token',
+          message: 'Invalid JWT',
         });
       } else if (jwt === logintoken__) {
-        res.status(200).json({
-          message: 'Success!',
-          jwt,
-        });
+        try {
+          {
+            const userInfo = await this.authService.validateUserByEmail(
+              body.email_id,
+              body.password,
+            );
+            if (userInfo) {
+              const newUserInfo = { ...userInfo, password: undefined };
+              return res.status(200).json({
+                message: 'Success! User Logged In',
+                user_id: newUserInfo.user_id,
+                name: newUserInfo.fullname,
+                email: newUserInfo.email_id,
+              });
+            } else if (userInfo === null) {
+              return res.status(401).json({
+                message: 'Invalid Credentials',
+              });
+            }
+          }
+        } catch (err) {
+          res.status(401).json({
+            message: 'Some Error Occured',
+            error: err,
+          });
+        }
       } else {
-        res.status(401).json({
+        return res.status(401).json({
           message: 'Invalid Token',
         });
       }
@@ -69,7 +100,7 @@ export class AuthController {
 
   @Get('/gettoken')
   async getToken(@Req() req, @Response() res: resEx) {
-    jwt = await this.jwtService.signAsync({ username: 'test' });
+    await this.jwtService.signAsync({ username: 'test' });
     // logT = jwt;
     try {
       res.cookie('jwt', jwt, { httpOnly: true }).json({

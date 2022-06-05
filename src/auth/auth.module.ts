@@ -15,18 +15,18 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forFeature([moleculus_users]),
     JwtModule.register({
       secret: 'secretKey',
-      signOptions: { expiresIn: '4800s' },
+      signOptions: { expiresIn: '48000s' },
     }),
   ],
   controllers: [AuthController],
   providers: [
     {
-      provide: 'AUTH_SERVICE',
-      useClass: AuthService,
-    },
-    {
       provide: 'USER_SERVICE',
       useClass: UsersService,
+    },
+    {
+      provide: 'AUTH_SERVICE',
+      useClass: AuthService,
     },
     LocalStrategy,
     SessionSerializer,
